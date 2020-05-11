@@ -27,8 +27,8 @@ def call_once(func):
   arguments (use @functools.lru_cache for that sort of thing), so this only
   works on callables that take no args.
   """
-  argspec = inspect.getargspec(func)
-  if argspec.args or argspec.varargs or argspec.keywords:
+  argspec = inspect.getfullargspec(func)
+  if argspec.args or argspec.varargs or argspec.varkw:
     raise ValueError('Can only decorate functions with no args', func, argspec)
 
   @functools.wraps(func)
