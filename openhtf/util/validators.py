@@ -62,6 +62,14 @@ import six
 
 _VALIDATORS = {}
 
+class ValidatorException()
+
+def wrap_call_exception(validator):
+  def wrapper(*args, **kwargs):
+    result = validator(args, kwargs)
+    if not result:
+      raise ValidatorException("%s conditions not met\nargs: %s kwargs: %s" % (validator.__name__, args, kwargs))
+    return result
 
 def register(validator, name=None):
   name = name or validator.__name__
