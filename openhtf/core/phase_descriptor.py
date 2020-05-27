@@ -239,8 +239,7 @@ class PhaseDescriptor(mutablerecords.Record(
         # Check __dict__ to see if the attribute is explicitly defined in the
         # class, rather than being defined in a parent class.
         accept_substitute = ('auto_placeholder' in original_plug.cls.__dict__
-                             and original_plug.cls.auto_placeholder
-                             and issubclass(sub_class, original_plug.cls))
+                             and original_plug.cls.auto_placeholder)
 
       if not accept_substitute:
         raise openhtf.plugs.InvalidPlugError(
