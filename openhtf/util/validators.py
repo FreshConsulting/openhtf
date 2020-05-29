@@ -62,7 +62,8 @@ import six
 
 _VALIDATORS = {}
 
-class ValidatorException()
+class ValidatorException(Exception):
+    """Error when validating."""
 
 def wrap_call_exception(validator):
   def wrapper(*args, **kwargs):
@@ -70,6 +71,7 @@ def wrap_call_exception(validator):
     if not result:
       raise ValidatorException("%s conditions not met\nargs: %s kwargs: %s" % (validator.__name__, args, kwargs))
     return result
+  return wrapper
 
 def register(validator, name=None):
   name = name or validator.__name__
